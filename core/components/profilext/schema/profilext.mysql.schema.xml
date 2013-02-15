@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model package="profilext" baseClass="xPDOObject" platform="mysql" defaultEngine="MyISAM" version="1.1">
+	<object class="pxtCatalog" table="catalog" extends="xPDOSimpleObject">
+		<field key="name" dbtype="varchar" precision="55" phptype="string" null="false" default="" index="unique" />
+
+		<index alias="name" name="name" primary="false" unique="true" type="BTREE" >
+			<column key="name" length="" collation="A" null="false" />
+		</index>
+		<composite alias="pxtValues" class="pxtValues" local="id" foreign="pxt_id" cardinality="many" owner="local" />
+	</object>
+	<object class="pxtValues" table="values" extends="xPDOSimpleObject">
+		<field key="pxt_id" dbtype="int" precision="11" phptype="integer" null="false" index="index" />
+		<field key="user_id" dbtype="int" precision="11" phptype="integer" null="false" index="index" />
+		<field key="value" dbtype="mediumtext" phptype="string" null="false" />
+
+		<index alias="pxt_id" name="pxt_id" primary="false" unique="false" type="BTREE" >
+			<column key="pxt_id" length="" collation="A" null="false" />
+		</index>
+		<index alias="user_id" name="user_id" primary="false" unique="false" type="BTREE" >
+			<column key="user_id" length="" collation="A" null="false" />
+		</index>
+		<aggregate alias="CatalogId" class="pxtCatalog" local="pxt_id" foreign="id" cardinality="one" owner="foreign" />
+	</object>
+</model>
