@@ -1,1 +1,15 @@
-This file was created by JetBrains PhpStorm 4.0.3 for binding GitHub repository
+ProfileXT was written to pull the Profile Extended field data created during the create new user process of
+Login.Register and write it instead to two custom db tables: pxt_catalog which saves the "name" of the value, and
+pxt_values which saves the value and associates it with both the pxt_catalog record and the modUser record.
+
+This is done to make searches on very big extended Profiles faster by calling a single database of values instead of
+needing to call modUserProfile and then parsing the JSON extended field.
+
+This package contains the files to access the custom database tables: pxt_values and pxt_catalog.
+
+ProfileXT snippet is used as a posthook for the Login.Register snippet, and will strip the extended field of the profile
+after the new user is created, and drop this data into the database.
+
+UpdateProfileXT is a simple little "wrapper" snippet that will retrieve the PXT values based on the authenticated user
+and set them as placeholders. It will then call UpdateProfile and pass it these placeholders.
+
