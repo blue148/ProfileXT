@@ -49,7 +49,6 @@ if(count($uniqueCat)>0){
 		$uci->save();
 	}
 }
-
 //Login.Register saves all non-standard fields to the 'extended' array. 
 //Loop thru this array and save each value to the ProfileXT Values table IF it has a reference in the Catalog table
 foreach($userArr['extended'] as $ukey=>$uval){
